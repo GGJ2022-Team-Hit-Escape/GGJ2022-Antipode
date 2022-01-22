@@ -1,0 +1,1 @@
+This repo requires the LFS Git plugin to be installed prior to cloning. Download it here: https://git-lfs.github.com/
