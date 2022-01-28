@@ -71,7 +71,7 @@ public class MainCharacter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        animator.SetBool("Grounded", IsGrounded());
     } 
 
     private void FixedUpdate()
