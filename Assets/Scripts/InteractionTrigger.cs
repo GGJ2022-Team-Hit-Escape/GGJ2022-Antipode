@@ -19,7 +19,9 @@ public class InteractionTrigger : Trigger
     [SerializeField]
     private AnimationCurve promptFadeCurve;
 
-    public static InteractionTrigger interactionTriggerInRange;
+    private static List<InteractionTrigger> interactionTriggersInRange = new List<InteractionTrigger>();
+
+    public static bool interactionTriggerFocused { get { return interactionTriggersInRange.Count != 0; } }
 
     private void Start()
     {
@@ -36,8 +38,7 @@ public class InteractionTrigger : Trigger
 
         interactKey.action.performed -= InteractHit;
         promptCanvasGroup.alpha = 0;
-        if (interactionTriggerInRange == this)
-            interactionTriggerInRange = null;
+        interactionTriggersInRange.RemoveAll(x=>x == this);
     }
     private void InteractHit(InputAction.CallbackContext obj)
     {
@@ -52,10 +53,11 @@ public class InteractionTrigger : Trigger
         promptCanvasGroup.alpha = promptFadeCurve.Evaluate( fade);
 
         bool inRange = Vector3.Distance(MainCharacter.instance.transform.position, this.transform.position) < interactionDistance;
-        if (inRange && interactionTriggerInRange == null)
-            interactionTriggerInRange = this;
-        else if (!inRange && interactionTriggerInRange == this)
-            interactionTriggerInRange = null;
+
+        if (inRange && !interactionTriggersInRange.Contains(this))
+            interactionTriggersInRange.Add(this);
+        else if (!inRange && interactionTriggersInRange.Contains(this))
+            interactionTriggersInRange.RemoveAll(x=>x== this);
     }
 
     protected override void DoExtraGizmos()

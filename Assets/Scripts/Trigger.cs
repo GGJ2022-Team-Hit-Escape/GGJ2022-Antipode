@@ -10,6 +10,9 @@ public abstract class Trigger : MonoBehaviour
     [SerializeField]
     private UnityEngine.Events.UnityEvent onTriggerEvents;
 
+    [SerializeField]
+    private bool disableOnComplete = false;
+
     protected virtual string icon { get; } 
 
     protected void Run()
@@ -18,6 +21,9 @@ public abstract class Trigger : MonoBehaviour
             trigger?.Trigger();
 
         onTriggerEvents?.Invoke();
+
+        if (disableOnComplete)
+            enabled = false;
     }
 
     private void OnDrawGizmos()

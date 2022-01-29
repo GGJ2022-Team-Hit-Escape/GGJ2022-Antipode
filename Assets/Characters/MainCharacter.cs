@@ -48,6 +48,9 @@ public class MainCharacter : MonoBehaviour
 
     public static MainCharacter instance;
 
+    private bool movementLocked { get { return DialogSystem.isCurrentlyTalking; } }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,8 +79,17 @@ public class MainCharacter : MonoBehaviour
 
     private void FixedUpdate()
     {
+        HandleMovement();
+        
+    }
+
+    private void HandleMovement()
+    {
         float horizontalAxisValue = horizontalAxis.action.ReadValue<float>();
-        Debug.Log(horizontalAxisValue);
+
+        if (movementLocked)
+            horizontalAxisValue = 0f;
+
         rb.AddForce(Vector2.right * moveForce * horizontalAxisValue);
 
         if (Mathf.Abs(horizontalAxisValue) > 0.01f)//then set max speed to max
@@ -89,19 +101,18 @@ public class MainCharacter : MonoBehaviour
         animator.SetFloat("RunSpeed", Mathf.InverseLerp(0, maxSpeed, Mathf.Abs(rb.velocity.x)));
 
         //Flipping look direction if needed
-        if ((lookingRight && rb.velocity.x < 0) || (!lookingRight && rb.velocity.x > 0)) 
+        if ((lookingRight && rb.velocity.x < 0) || (!lookingRight && rb.velocity.x > 0))
             lookingRight = !lookingRight;
 
         animationSprite.localScale = new Vector3(lookingRight ? 1f : -1f, 1f);
 
         //Setting gravity scale
         rb.gravityScale = rb.velocity.y < 0 ? fallGravityScale : jumpGravityScale;
-        
     }
 
     private void OnJump(InputAction.CallbackContext obj)
     {
-        if(IsGrounded())
+        if(IsGrounded() && !movementLocked)
             rb.AddForce(Vector2.up * jumpForce);
     }
     private bool IsGrounded()

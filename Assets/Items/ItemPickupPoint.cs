@@ -19,6 +19,9 @@ public class ItemPickupPoint : MonoBehaviour
 
     [SerializeField]
     private GameObject interactionPrompt;
+
+    private bool pickupLocked { get { return DialogSystem.isCurrentlyTalking || InteractionTrigger.interactionTriggerFocused; } }
+
     private void Start()
     {
         interactControl.action.Enable();
@@ -43,9 +46,8 @@ public class ItemPickupPoint : MonoBehaviour
 
     private void DoInput()
     {
-        bool interactionTriggerInRange = InteractionTrigger.interactionTriggerInRange != null;
 
-        if (interactionTriggerInRange || DialogSystem.isCurrentlyTalking)
+        if (pickupLocked)
             return;
 
         if (currentlyHeldItem == null && interactControl.action.triggered && currentlyHighlightedItem != null)
@@ -77,11 +79,10 @@ public class ItemPickupPoint : MonoBehaviour
     private void DrawInteractionPrompt()
     {
         bool currentlyHoldingObject = currentlyHeldItem != null;
-        bool interactionTriggerInRange = InteractionTrigger.interactionTriggerInRange != null;
 
 
         //Setting interaction prompt to follow selectable object
-        interactionPrompt.SetActive(currentlyHighlightedItem != null && !currentlyHoldingObject && !interactionTriggerInRange);
+        interactionPrompt.SetActive(currentlyHighlightedItem != null && !currentlyHoldingObject && !pickupLocked);
         if (currentlyHighlightedItem != null)
             interactionPrompt.transform.position = currentlyHighlightedItem.transform.position;
     }
