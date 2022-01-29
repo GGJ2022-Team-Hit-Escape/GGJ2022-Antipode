@@ -19,6 +19,8 @@ public class InteractionTrigger : Trigger
     [SerializeField]
     private AnimationCurve promptFadeCurve;
 
+    public static InteractionTrigger interactionTriggerInRange;
+
     private void Start()
     {
         interactKey?.action.Enable();
@@ -34,6 +36,8 @@ public class InteractionTrigger : Trigger
 
         interactKey.action.performed -= InteractHit;
         promptCanvasGroup.alpha = 0;
+        if (interactionTriggerInRange == this)
+            interactionTriggerInRange = null;
     }
     private void InteractHit(InputAction.CallbackContext obj)
     {
@@ -46,6 +50,12 @@ public class InteractionTrigger : Trigger
         float distance = Vector3.Distance(MainCharacter.instance.transform.position, this.transform.position);
         float fade = 1f - Mathf.Clamp01(Mathf.InverseLerp(0, interactionDistance, distance));
         promptCanvasGroup.alpha = promptFadeCurve.Evaluate( fade);
+
+        bool inRange = Vector3.Distance(MainCharacter.instance.transform.position, this.transform.position) < interactionDistance;
+        if (inRange && interactionTriggerInRange == null)
+            interactionTriggerInRange = this;
+        else if (!inRange && interactionTriggerInRange == this)
+            interactionTriggerInRange = null;
     }
 
     protected override void DoExtraGizmos()

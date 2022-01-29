@@ -26,6 +26,8 @@ public class DialogSystem : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
+    public static bool isCurrentlyTalking { get { return instance.displayState != DisplayStates.Waiting; } }
+
     // Start is called before the first frame update
     void Start()
     {

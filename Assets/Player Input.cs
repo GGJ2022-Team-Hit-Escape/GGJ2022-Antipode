@@ -49,6 +49,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Vertical"",
+                    ""type"": ""Button"",
+                    ""id"": ""9af3d8ab-fabb-44be-a751-79f50b618b86"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -139,6 +147,50 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""395ccbef-5782-4c1a-88cb-98fe548e05c1"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Vertical"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""1d58626b-b0be-4503-8fef-83d57c308102"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Vertical"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""9325d766-e591-4b8f-85fa-260d7c692376"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Vertical"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""9ddb6926-344e-4743-b389-f6da86abc596"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Vertical"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -151,6 +203,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Continue = m_Player.FindAction("Continue", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_Vertical = m_Player.FindAction("Vertical", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -204,6 +257,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Continue;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_Vertical;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -212,6 +266,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Continue => m_Wrapper.m_Player_Continue;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @Vertical => m_Wrapper.m_Player_Vertical;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -233,6 +288,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Vertical.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnVertical;
+                @Vertical.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnVertical;
+                @Vertical.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnVertical;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -249,6 +307,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Vertical.started += instance.OnVertical;
+                @Vertical.performed += instance.OnVertical;
+                @Vertical.canceled += instance.OnVertical;
             }
         }
     }
@@ -259,5 +320,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnContinue(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnVertical(InputAction.CallbackContext context);
     }
 }
