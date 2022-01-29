@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class BackgroundAspectRatio : MonoBehaviour
 {
     [SerializeField]
@@ -20,6 +21,8 @@ public class BackgroundAspectRatio : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (block == null)
+            block = new MaterialPropertyBlock();
         backgroundRenderer.GetPropertyBlock(block);
         Vector2Int screenDimensions = new Vector2Int(Screen.width, Screen.height);
         Vector2 fitRatio = CalculateFitRatio(referenceDimensions, screenDimensions);

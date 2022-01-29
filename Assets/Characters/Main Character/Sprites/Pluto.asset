@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf7c34a0dc4e6348bea04faa70406ee, type: 3}
+  m_Name: Pluto
+  m_EditorClassIdentifier: 
+  m_Labels:
+  - m_Name: Run
+    m_Hash: 1748754976
+    m_CategoryList:
+    - m_Name: 0
+      m_Hash: -186917087
+      m_Sprite: {fileID: -3031039695069082164, guid: 00881568dd5985641bc4921441fc9ddc, type: 3}
+    - m_Name: 1
+      m_Hash: -2082672713
+      m_Sprite: {fileID: -949897857611720817, guid: 00881568dd5985641bc4921441fc9ddc, type: 3}
+    - m_Name: 2
+      m_Hash: 450215437
+      m_Sprite: {fileID: -3218559744521383548, guid: 00881568dd5985641bc4921441fc9ddc, type: 3}
+    - m_Name: 3
+      m_Hash: 1842515611
+      m_Sprite: {fileID: -2723469908404630729, guid: 00881568dd5985641bc4921441fc9ddc, type: 3}
+    - m_Name: 4
+      m_Hash: -206169288
+      m_Sprite: {fileID: -2325871254171002475, guid: 00881568dd5985641bc4921441fc9ddc, type: 3}
+    - m_Name: 5
+      m_Hash: -2068763730
+      m_Sprite: {fileID: -1189301037036979126, guid: 00881568dd5985641bc4921441fc9ddc, type: 3}
+    - m_Name: 6
+      m_Hash: 498629140
+      m_Sprite: {fileID: -949897857611720817, guid: 00881568dd5985641bc4921441fc9ddc, type: 3}
+  - m_Name: Idle
+    m_Hash: 2081823275
+    m_CategoryList:
+    - m_Name: 0
+      m_Hash: -186917087
+      m_Sprite: {fileID: 3032823790069643744, guid: bc79c2ce30a33404bb89f12c70556ad4, type: 3}
+    - m_Name: 1
+      m_Hash: -2082672713
+      m_Sprite: {fileID: -1134900700381718456, guid: bc79c2ce30a33404bb89f12c70556ad4, type: 3}
+    - m_Name: 2
+      m_Hash: 450215437
+      m_Sprite: {fileID: 6611990081441391041, guid: bc79c2ce30a33404bb89f12c70556ad4, type: 3}
+    - m_Name: 3
+      m_Hash: 1842515611
+      m_Sprite: {fileID: 5999900034317862351, guid: bc79c2ce30a33404bb89f12c70556ad4, type: 3}
+    - m_Name: 4
+      m_Hash: -206169288
+      m_Sprite: {fileID: -3010474218353704640, guid: bc79c2ce30a33404bb89f12c70556ad4, type: 3}
+    - m_Name: 5
+      m_Hash: -2068763730
+      m_Sprite: {fileID: 6922260801778996456, guid: bc79c2ce30a33404bb89f12c70556ad4, type: 3}
+  - m_Name: Jump
+    m_Hash: 125937960
+    m_CategoryList:
+    - m_Name: 0
+      m_Hash: -186917087
+      m_Sprite: {fileID: 21300000, guid: 6e538b4965588064fb654f1303358657, type: 3}
