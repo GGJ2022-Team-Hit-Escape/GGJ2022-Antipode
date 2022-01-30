@@ -20,6 +20,9 @@ public class ZoneTrigger : Trigger
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (this.enabled == false)
+            return;
+
         int characterlayerMask = LayerMask.GetMask("Character");
         if (collision.gameObject.GetComponent<MainCharacter>() != null)
             Run();

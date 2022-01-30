@@ -13,6 +13,11 @@ public class Item : MonoBehaviour
     [SerializeField]
     private Collider2D myCollider;
 
+    [SerializeField]
+    private UnityEngine.Events.UnityEvent OnFirstPickup;
+
+    private bool firstPickupOcurred = false;
+
     private void Awake()
     {
     }
@@ -34,5 +39,12 @@ public class Item : MonoBehaviour
     {
         rb.isKinematic = true;
         myCollider.enabled = false;
+    }
+
+    public void OnPickup()
+    {
+        if (!firstPickupOcurred)
+            OnFirstPickup?.Invoke();
+        firstPickupOcurred = true;
     }
 }

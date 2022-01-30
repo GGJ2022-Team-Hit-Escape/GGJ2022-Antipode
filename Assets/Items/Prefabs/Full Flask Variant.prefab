@@ -9,6 +9,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4556689860543048924, guid: 82d5e7aa30d26f84aa783060b16883e4, type: 3}
       propertyPath: m_Name
+      value: Full Flask Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4556689860543049504, guid: 82d5e7aa30d26f84aa783060b16883e4, type: 3}
+      propertyPath: itemName
       value: Full Flask
       objectReference: {fileID: 0}
     - target: {fileID: 4556689860543049505, guid: 82d5e7aa30d26f84aa783060b16883e4, type: 3}

@@ -62,6 +62,7 @@ public class ItemPickupPoint : MonoBehaviour
         {
             currentlyHeldItem = currentlyHighlightedItem;
             currentlyHeldItem.TurnOffPhysics();
+            currentlyHeldItem.OnPickup();
         }
         else if (currentlyHeldItem != null)
         {
