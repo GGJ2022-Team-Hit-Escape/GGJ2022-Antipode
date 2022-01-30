@@ -85,6 +85,7 @@ public class DialogSystem : MonoBehaviour
 
                 if (continueKey.action.triggered)
                 {
+                    dialogQueue[0].onMessageFinished?.Invoke();
                     dialogQueue.RemoveAt(0);
                     textDisplay.text = "";
                     displayState = DisplayStates.Waiting;

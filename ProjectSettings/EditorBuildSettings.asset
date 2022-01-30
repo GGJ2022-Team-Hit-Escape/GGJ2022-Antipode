@@ -4,5 +4,29 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Level 0 - Main Menu.unity
+    guid: b854da9f9fb21ba47865dcfbe9c5045b
+  - enabled: 1
+    path: Assets/Scenes/Level 0-1 Transition.unity
+    guid: b9b7df5434bc9d54bac655205140a460
+  - enabled: 1
+    path: Assets/Scenes/Level 1 - The Door.unity
+    guid: 6e032737a496dc0489100b28fc9a59b5
+  - enabled: 1
+    path: Assets/Scenes/Level 1-2 Transition.unity
+    guid: f9fa6a09a09e27b489675af021167bd0
+  - enabled: 1
+    path: Assets/Scenes/Level 2 - The Tree.unity
+    guid: 76bc02f4d2ad9d34ab1f3f394ea526de
+  - enabled: 1
+    path: Assets/Scenes/Level 2-3 Transition.unity
+    guid: 7c3a2e4699226a24f93016a9b4073135
+  - enabled: 1
+    path: Assets/Scenes/Level 3 - The Guards.unity
+    guid: ef3911b1066767b4b926be9de38cb376
+  - enabled: 1
+    path: Assets/Scenes/Level 4 - Credits.unity
+    guid: f8633cdef11872644a4de5390c6e1635
   m_configObjects: {}

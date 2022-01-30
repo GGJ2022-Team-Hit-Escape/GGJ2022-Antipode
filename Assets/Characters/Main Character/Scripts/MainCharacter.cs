@@ -45,8 +45,15 @@ public class MainCharacter : MonoBehaviour
 
     private bool lookingRight = true;
 
-
-    public static MainCharacter instance;
+    private static MainCharacter _instance;
+    public static MainCharacter instance { 
+        get
+        {
+            if (_instance == null)
+                _instance = FindObjectOfType<MainCharacter>();
+            return _instance;
+        } 
+    }
 
     private bool movementLocked { get { return DialogSystem.isCurrentlyTalking; } }
 
@@ -56,7 +63,6 @@ public class MainCharacter : MonoBehaviour
     {
         horizontalAxis.action.Enable();
         jumpAxis.action.Enable();
-        instance = this;
     }
 
     private void OnEnable()
@@ -82,6 +88,12 @@ public class MainCharacter : MonoBehaviour
         HandleMovement();
         
     }
+
+    public void Kick(Vector2 force)
+    {
+        rb.AddForce(force);
+    }
+
 
     private void HandleMovement()
     {

@@ -3,7 +3,7 @@ using UnityEditor;
 using System.Collections.Generic;
 
 public class GridShadowCastersGenerator : MonoBehaviour {
-
+#if UNITY_EDITOR
     public string colliderTag = "GenerateShadowCasters";
     public GameObject shadowCasterPrefab;
     public Transform shadowCastersContainer;
@@ -168,7 +168,10 @@ public class GridShadowCastersGenerator : MonoBehaviour {
 
         return false;
     }
+#endif
 }
+
+#if UNITY_EDITOR
 
 [CustomEditor(typeof(GridShadowCastersGenerator))]
 public class GridShadowCastersGeneratorEditor : Editor {
@@ -193,3 +196,5 @@ public class GridShadowCastersGeneratorEditor : Editor {
         }
     }
 }
+
+#endif

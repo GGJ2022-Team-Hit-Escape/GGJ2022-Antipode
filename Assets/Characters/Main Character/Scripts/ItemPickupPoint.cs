@@ -69,6 +69,7 @@ public class ItemPickupPoint : MonoBehaviour
             if (interactControl.action.triggered)
             {
                 currentlyHeldItem.TurnOnPhysics();
+                currentlyHeldItem.OnDrop();
 
                 float verticalAxis = verticalControl.action.ReadValue<float>();
                 Vector2 throwForce = new Vector2(50, 60 * verticalAxis);
@@ -137,7 +138,7 @@ public class ItemPickupPoint : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Item item = collision.gameObject.GetComponent<Item>();
-        if (item != null)
+        if (item != null && item.enabled)
         {
             itemsInRange.Add(item);
         }

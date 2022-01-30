@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(CircleCollider2D))]
 public class ZoneTrigger : Trigger
 {
+    public UnityEvent onPlayerExit;
+
     protected override string icon => "Zone";
 
     private CircleCollider2D _circleCollider;
@@ -26,6 +29,12 @@ public class ZoneTrigger : Trigger
         int characterlayerMask = LayerMask.GetMask("Character");
         if (collision.gameObject.GetComponent<MainCharacter>() != null)
             Run();
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<MainCharacter>() != null)
+            onPlayerExit?.Invoke();
     }
 
     protected override void DoExtraGizmos()

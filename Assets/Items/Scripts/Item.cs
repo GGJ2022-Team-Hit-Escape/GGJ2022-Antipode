@@ -16,12 +16,24 @@ public class Item : MonoBehaviour
     [SerializeField]
     private UnityEngine.Events.UnityEvent OnFirstPickup;
 
+
+    [SerializeField]
+    private UnityEngine.Events.UnityEvent OnPickupOccurred;
+
+
+    [SerializeField]
+    private UnityEngine.Events.UnityEvent OnDropOccurred;
+
     private bool firstPickupOcurred = false;
 
     private void Awake()
     {
     }
 
+    private void Update()
+    {
+        
+    }
 
     public void Kick(Vector2 force)
     {
@@ -46,5 +58,11 @@ public class Item : MonoBehaviour
         if (!firstPickupOcurred)
             OnFirstPickup?.Invoke();
         firstPickupOcurred = true;
+        OnPickupOccurred?.Invoke();
+    }
+
+    public void OnDrop()
+    {
+        OnDropOccurred?.Invoke();
     }
 }
