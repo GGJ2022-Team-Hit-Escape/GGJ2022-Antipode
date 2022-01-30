@@ -7,17 +7,15 @@ using UnityEngine.Tilemaps;
 public class WorldController : MonoBehaviour
 {
 
-    [SerializeField]
-    private TilemapRenderer baseWorldRenderer;
 
     [SerializeField]
     private bool _lightWorldShowing = true;
 
-    public static bool lightWorldShowing { get { return instance._lightWorldShowing; } }
+    public static bool lightWorldShowing { get { return instance._lightWorldShowing; } set { instance._lightWorldShowing = value; } }
 
     [SerializeField]
     private bool _lightCharacterShowing = false;
-    public static bool lightCharacterShowing { get { return instance._lightCharacterShowing; } }
+    public static bool lightCharacterShowing { get { return instance._lightCharacterShowing; } set { instance._lightCharacterShowing = value; } }
 
     private static WorldController _instance;
 
@@ -31,7 +29,14 @@ public class WorldController : MonoBehaviour
         }
     }
 
-    private MaterialPropertyBlock block;
+    public static GameObject LightTilemap { get => instance._lightTilemap;  }
+    public static GameObject DarkTilemap { get => instance._darkTilemap; }
+
+    [SerializeField]
+    private GameObject _lightTilemap;
+
+    [SerializeField]
+    private GameObject _darkTilemap;
 
     private void Awake()
     {
@@ -41,16 +46,11 @@ public class WorldController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        block = new MaterialPropertyBlock();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (block == null)
-            block = new MaterialPropertyBlock();
-        baseWorldRenderer.GetPropertyBlock(block);
-        block.SetFloat("_Mix", _lightWorldShowing ? 0f: 1f);
-        baseWorldRenderer.SetPropertyBlock(block);
     }
+
 }

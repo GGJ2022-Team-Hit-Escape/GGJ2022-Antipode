@@ -21,6 +21,12 @@ public class InteractionTrigger : Trigger
 
     private static List<InteractionTrigger> interactionTriggersInRange = new List<InteractionTrigger>();
 
+    [SerializeField]
+    private string requiredItemName;
+
+    [SerializeField]
+    private bool killCurrentlyHeldObject = false;
+
     public static bool interactionTriggerFocused { get { return interactionTriggersInRange.Count != 0; } }
 
     private void Start()
@@ -42,22 +48,36 @@ public class InteractionTrigger : Trigger
     }
     private void InteractHit(InputAction.CallbackContext obj)
     {
-        if (Vector3.Distance(MainCharacter.instance.transform.position, this.transform.position) < interactionDistance)
+        if (Vector3.Distance(MainCharacter.instance.transform.position, this.transform.position) < interactionDistance && CheckIfTagMatches())
+        {
+            if (killCurrentlyHeldObject)
+                FindObjectOfType<ItemPickupPoint>().KillHeldObject();
             Run();
+        }
     }
 
     private void Update()
     {
         float distance = Vector3.Distance(MainCharacter.instance.transform.position, this.transform.position);
         float fade = 1f - Mathf.Clamp01(Mathf.InverseLerp(0, interactionDistance, distance));
+        if (!CheckIfTagMatches())
+            fade = 0;
+
+
         promptCanvasGroup.alpha = promptFadeCurve.Evaluate( fade);
 
-        bool inRange = Vector3.Distance(MainCharacter.instance.transform.position, this.transform.position) < interactionDistance;
+
+        bool inRange = Vector3.Distance(MainCharacter.instance.transform.position, this.transform.position) < interactionDistance && CheckIfTagMatches();
 
         if (inRange && !interactionTriggersInRange.Contains(this))
             interactionTriggersInRange.Add(this);
         else if (!inRange && interactionTriggersInRange.Contains(this))
             interactionTriggersInRange.RemoveAll(x=>x== this);
+    }
+
+    private bool CheckIfTagMatches()
+    {
+        return requiredItemName == ItemPickupPoint.currentlyHeldItemName;
     }
 
     protected override void DoExtraGizmos()

@@ -20,6 +20,8 @@ public class ItemPickupPoint : MonoBehaviour
     [SerializeField]
     private GameObject interactionPrompt;
 
+    public static string currentlyHeldItemName = "";
+
     private bool pickupLocked { get { return DialogSystem.isCurrentlyTalking || InteractionTrigger.interactionTriggerFocused; } }
 
     private void Start()
@@ -35,6 +37,12 @@ public class ItemPickupPoint : MonoBehaviour
         DrawInteractionPrompt();
         DoInput();
         DoHoldObject();
+
+        if (currentlyHeldItem != null)
+            currentlyHeldItemName = currentlyHeldItem.itemName;
+        else
+            currentlyHeldItemName = "";
+
     }
     private void DoHoldObject()
     {
@@ -74,6 +82,13 @@ public class ItemPickupPoint : MonoBehaviour
                 currentlyHeldItem = null;
             }
         }
+    }
+
+    public void KillHeldObject()
+    {
+        if (currentlyHeldItem != null)
+            Destroy(currentlyHeldItem.gameObject);
+        currentlyHeldItem = null;
     }
 
     private void DrawInteractionPrompt()
